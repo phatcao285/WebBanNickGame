@@ -1,0 +1,184 @@
+﻿
+@{
+    ViewBag.Title = "Shop";
+    Layout = "~/Views/Shared/Layout.cshtml";
+    int id = (int)Session["UID"];
+    string s = (string)Session["s"];
+}
+@using PagedList
+@using PagedList.Mvc;
+@model IPagedList<WebBanNickGame.Models.NickLM>
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="#">Home</a>
+                <a class="breadcrumb-item text-dark" href="#">Shop</a>
+                <span class="breadcrumb-item active">Shop List</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <!-- Shop Sidebar Start -->
+        <div class="col-lg-3 col-md-4">
+            <!-- Price Start -->
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Lọc theo giá</span></h5>
+            <div class="bg-light p-4 mb-30">
+                <form method="post" action="@Url.Action("LocTheoGia", "Home",new {idloc =  @id})">
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="priceAll" value="true" class="custom-control-input" checked id="price-all">
+                        <label class="custom-control-label" for="price-all">Tất cả</label>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="price1" value="true" class="custom-control-input" id="price-1">
+                        <label class="custom-control-label" for="price-1">0 - 100.000</label>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="price2" value="true" class="custom-control-input" id="price-2">
+                        <label class="custom-control-label" for="price-2">100.000 - 200.000</label>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="price3" value="true" class="custom-control-input" id="price-3">
+                        <label class="custom-control-label" for="price-3">200.000 - 500.000</label>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="price4" value="true" class="custom-control-input" id="price-4">
+                        <label class="custom-control-label" for="price-4">Trên 500.000</label>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <button type="submit" class="btn btn-primary">Lọc</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Price End -->
+            <!-- Color Start -->
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Lọc theo tướng</span></h5>
+            <div class="bg-light p-4 mb-30">
+                <form method="post" action="@Url.Action("LocTheoTuong", "Home",new {idloc =  @id})">
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="tuongAll" value="true" class="custom-control-input" checked id="color-all">
+                        <label class="custom-control-label" for="color-all">Tất cả</label>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="tuong1" value="true" class="custom-control-input" id="color-2">
+                        <label class="custom-control-label" for="color-2">0-100</label>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="tuong2" value="true" class="custom-control-input" id="color-2">
+                        <label class="custom-control-label" for="color-2">100-300</label>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="tuong3" value="true" class="custom-control-input" id="color-3">
+                        <label class="custom-control-label" for="color-3">300-600</label>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" name="tuong4" value="true" class="custom-control-input" id="color-4">
+                        <label class="custom-control-label" for="color-4">Trên 600</label>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <button type="submit" class="btn btn-primary">Lọc</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Color End -->
+            <!-- Size Start -->
+            <!-- Size End -->
+        </div>
+        <!-- Shop Sidebar End -->
+        <!-- Shop Product Start -->
+        <div class="col-lg-9 col-md-8">
+            <div class="row pb-3">
+                <div class="col-12 pb-1">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+
+                        <div class="ml-2">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sắp xếp</button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="@Url.Action("SapXepTangDan","Home", new { uid = @id })" class="dropdown-item">Tăng dần</a>
+                                    <a class="dropdown-item" href="@Url.Action("SapXepGiamDan","Home", new { uid = @id })">Giảm dần</a>
+                                </div>
+                            </div>
+                            <div>
+                                <form action="">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search for products">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text bg-transparent text-primary">
+                                                <i class="fa fa-search"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @foreach (var sp in Model)
+                {
+                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                        <div class="product-item bg-light mb-4">
+                            <div class="product-img position-relative overflow-hidden">
+                                <img class="img-fluid w-100" src="~/Image/Nick/@sp.ThuVienChuaHinh/@sp.MaNick/@sp.HinhAnh" alt="">
+                                <div class="product-action">
+                                    @if (Session["taikhoan"] != null)
+                                    {
+                                        <a class="btn btn-outline-dark btn-square" href="@Url.Action("ThanhToan", "Home", new { id = @sp.MaNick })"><i class="fa fa-shopping-cart"></i></a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-outline-dark btn-square" href="@Url.Action("DangNhap", "Home")"><i class="fa fa-shopping-cart"></i></a>
+                                    }
+                                    <a class="btn btn-outline-dark btn-square" href="@Url.Action("ShopDetailsLM", "Home", new { id = @sp.MaNick, hinh = @sp.ThuVienChuaHinh })"><i class="fa fa-search"></i></a>
+                                </div>
+
+                            </div>
+                            <div class="text-center py-4">
+                                <p class="h6 text-decoration-none text-truncate" href="">Rank : @sp.Rank</p>
+                                <p class="h6 text-decoration-none text-truncate" href="">Tướng : @sp.Tuong</p>
+                                <p class="h6 text-decoration-none text-truncate" href="">Trang phục : @sp.TrangPhuc</p>
+
+                                <div class="d-flex align-items-center justify-content-center mt-2">
+                                    <h5>Giá : @sp.Gia</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+                <div class="col-12">
+                    <div class="pagination justify-content-center">
+                        <ul class="pagination">
+                            @if (Model.PageCount > 1)
+                            {
+                                <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                                    <a class="page-link" href="@Url.Action("TimKiem", new {uid =  @id, page = 1, size = ViewBag.SelectedSize,s=@s })">First</a>
+                                </li>
+                                <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                                    <a class="page-link" href="@Url.Action("TimKiem", new {uid =  @id, page = Model.PageNumber - 1, size = ViewBag.SelectedSize,s=@s })">Previous</a>
+                                </li>
+                                for (int i = 1; i <= Model.PageCount; i++)
+                                {
+                                    <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                                        <a class="page-link" href="@Url.Action("TimKiem", new {uid =  @id, page = i, size = ViewBag.SelectedSize,s=@s })">@i</a>
+                                    </li>
+                                }
+                                <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")">
+                                    <a class="page-link" href="@Url.Action("TimKiem", new {uid =  @id, page = Model.PageNumber + 1, size = ViewBag.SelectedSize,s=@s })">Next</a>
+                                </li>
+                                <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")">
+                                    <a class="page-link" href="@Url.Action("TimKiem", new {uid =  @id, page = Model.PageCount, size = ViewBag.SelectedSize,s=@s })">Last</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Shop Product End -->
+    </div>
+</div>
+

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WebBanNickGame.Models.DonHang>
+
+@{
+    ViewBag.Title = "Đơn Hàng";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ThoiGianMua)</th>
+            <th>@Html.DisplayNameFor(model => model.MaKH)</th>
+            <th>@Html.DisplayNameFor(model => model.GiaTien)</th>
+            <th>@Html.DisplayNameFor(model => model.MaNick)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ThoiGianMua)</td>
+                <td>@Html.DisplayFor(modelItem => item.MaKH)</td>
+                <td>@Html.DisplayFor(modelItem => item.GiaTien)</td>
+                <td>@Html.DisplayFor(modelItem => item.MaNick)</td>
+            </tr>
+        }
+    </tbody>
+</table>

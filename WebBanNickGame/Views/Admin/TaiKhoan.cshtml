@@ -1,0 +1,36 @@
+﻿@model IEnumerable<WebBanNickGame.Models.NguoiDung>
+
+@{
+    ViewBag.Title = "Tài Khoản";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.TenKH)</th>
+            <th>@Html.DisplayNameFor(model => model.email)</th>
+            <th>@Html.DisplayNameFor(model => model.Tendangnhap)</th>
+            <th>@Html.DisplayNameFor(model => model.matkhau)</th>
+            <th>@Html.DisplayNameFor(model => model.chucvu)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.TenKH)</td>
+                <td>@Html.DisplayFor(modelItem => item.email)</td>
+                <td>@Html.DisplayFor(modelItem => item.Tendangnhap)</td>
+                <td></td>
+                <td>@Html.DisplayFor(modelItem => item.chucvu)</td>
+                <td>
+                    @Html.ActionLink("Nâng lên quản lý", "Update", new { id = item.MaKH }, new { @class = "btn btn-warning" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

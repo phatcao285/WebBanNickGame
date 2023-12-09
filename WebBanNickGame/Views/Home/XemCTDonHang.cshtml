@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "XemCTDonHang";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@model IEnumerable<WebBanNickGame.Models.ChiTietDonHang>
+<div class="container">
+    <h2 class="mt-5">Chi Tiết Đơn Hàng</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Mã Đơn Hàng</th>
+                <th>Tài khoản</th>
+                <th>Mật khẩu</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ctdh in Model)
+            {
+                <tr>
+                    <td>@ctdh.MaDH</td>
+                    <td>@ctdh.TaiKhoan</td>
+                    <td>@ctdh.Matkhau</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-center">
+        <a href="@Url.Action("DonHang", "Home")" class="btn btn-primary">Quay Lại</a>
+    </div>
+</div>
+

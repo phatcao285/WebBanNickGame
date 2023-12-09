@@ -1,0 +1,109 @@
+﻿@using WebBanNickGame.Models
+@{
+    ViewBag.Title = "ShopDetails";
+    Layout = "~/Views/Shared/Layout.cshtml";
+    int id = (int)Session["Ma"];
+    string hinh = (string)Session["hinh"];
+    string folderPath = Server.MapPath("~/Image/Nick/"+@hinh+"/" + @id); // Thay đổi đường dẫn thư mục theo thực tế
+    List<NickLM> nick = Session["DanhSachNickLM"] as List<NickLM>;
+    // Lấy danh sách tên tệp trong thư mục
+    string[] fileNames = Directory.GetFiles(folderPath);
+
+}
+@using System.Diagnostics
+
+@model NickLM
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="#">Home</a>
+                <a class="breadcrumb-item text-dark" href="#">Shop</a>
+                <span class="breadcrumb-item active">Shop Detail</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="container-fluid pb-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-5 mb-30">
+            <div id="product-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner bg-light">
+                    <div class="carousel-item active">
+                        <img class="w-100 h-100" src="~/Image/Nick/@hinh/@id/HinhDaiDien.jpg" alt="Image">
+                    </div>
+                    @foreach (string fileName in fileNames)
+                    {
+                        <div class="carousel-item">
+                            <img class="w-100 h-100" src="~/Image/Nick/@hinh/@id/@Path.GetFileName(fileName)" alt="Image">
+                        </div>
+                    }
+                </div>
+                <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
+                    <i class="fa fa-2x fa-angle-left text-dark"></i>
+                </a>
+                <a class="carousel-control-next" href="#product-carousel" data-slide="next">
+                    <i class="fa fa-2x fa-angle-right text-dark"></i>
+                </a>
+            </div>
+        </div>
+            <div class="col-lg-7 h-auto mb-30">
+                <div class="h-100 bg-light p-30">
+                    <h3>Rank : @Model.Rank</h3>
+                    <h3>Tướng : @Model.Tuong</h3>
+                    <h3>Trang phục : @Model.TrangPhuc</h3>
+                    <h3 class="font-weight-semi-bold mb-4">Giá : @Model.Gia</h3>
+                    <div class="d-flex align-items-center mb-4 pt-2">
+                        @if (Session["taikhoan"] != null)
+                        {
+                            <a class="btn btn-primary px-3" href="@Url.Action("ThanhToan","Home",new {id= @Model.MaNick})">
+                                <i class="fa fa-shopping-cart mr-1"></i> Mua hàng
+                            </a>
+                        }
+                        else
+                        {
+                    <a class="btn btn-primary px-3"  href="@Url.Action("DangNhap", "Home")"> <i class="fa fa-shopping-cart mr-1"></i> Mua hàng</a>
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+        
+
+
+    </div>
+
+</div>
+<div class="container py-5">
+    <h2 class="section-title text-uppercase mb-4"><span class="bg-secondary pr-3">Nick cùng đồng giá</span></h2>
+    <div class="row">
+        @foreach (var sp in nick.Take(6))
+        {
+            <div class="col-lg-2 col-md-6 col-sm-6 pb-1">
+                <div class="product-item bg-light mb-4">
+                    <div class="product-img position-relative overflow-hidden">
+                        <img class="img-fluid w-100" src="~/Image/Nick/@hinh/@sp.MaNick/@sp.HinhAnh" alt="">
+                        <div class="product-action">
+                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="@Url.Action("ShopDetailsLM","Home",new { id = @sp.MaNick})"><i class="fa fa-search"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center py-4">
+                        <p class="h6 text-decoration-none text-truncate" href="">Rank : @sp.Rank</p>
+                        <p class="h6 text-decoration-none text-truncate" href="">Tướng : @sp.Tuong</p>
+                        <p class="h6 text-decoration-none text-truncate" href="">Trang phục : @sp.TrangPhuc</p>
+
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h5>Giá : @sp.Gia</h5>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                }
+
+
+
+            </div>
+        </div>
+
+

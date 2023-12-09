@@ -1,0 +1,96 @@
+﻿@using WebBanNickGame.Models
+<div class="container-fluid">
+    <div class="row bg-secondary py-1 px-xl-5">
+        <div class="col-lg-6 d-none d-lg-block">
+            <div class="d-inline-flex align-items-center h-100">
+                <a class="text-body mr-3" href="~/Home/Contact">Liên hệ</a>
+            </div>
+        </div>
+        <div class="col-lg-6 text-center text-lg-right">
+            <div class="d-inline-flex align-items-center">
+                @if (Session["TaiKhoan"] == null)
+                {
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Tài khoản</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="@Url.Action("DangNhap", "Home")">Đăng nhập</a>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    var tk = Session["TaiKhoan"] as NguoiDung;
+                    if (((Session["TaiKhoan"] as NguoiDung).chucvu) != null)
+                    {
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Xin chào @tk.TenKH </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="@Url.Action("Infor", "Home", new {id = tk.MaKH})">Thông tin tài khoản</a>
+                                <a class="dropdown-item" href="@Url.Action("DonHang", "Home")">Lịch sử mua nick</a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Admin")">Trang quản lý</a>
+                                <a class="dropdown-item" href="@Url.Action("Logout", "Home")">Đăng xuất</a>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Xin chào @tk.TenKH </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="@Url.Action("DangNhap", "Home")">Thông tin tài khoản</a>
+                                <a class="dropdown-item" href="@Url.Action("DonHang", "Home")">Lịch sử mua nick</a>
+                                <a class="dropdown-item" href="@Url.Action("Logout", "Home")">Đăng xuất</a>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+
+            <div class="d-inline-flex align-items-center d-block d-lg-none">
+                <a href="" class="btn px-0 ml-2">
+                    <i class="fas fa-heart text-dark"></i>
+                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                </a>
+                <a href="" class="btn px-0 ml-2">
+                    <i class="fas fa-shopping-cart text-dark"></i>
+                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+        <div class="col-lg-4">
+            <a href="~/Home/Index" class="text-decoration-none">
+                <span class="h1 text-uppercase text-primary bg-dark px-2">Multi</span>
+                <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
+            </a>
+        </div>
+        <div class="col-lg-4 col-6 text-left">
+        </div>
+        <div class="col-lg-4 col-6 text-right">
+            <p class="m-0">Số điện thoại</p>
+            <h5 class="m-0">+012 345 6789</h5>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-dark mb-30">
+    <div class="row px-xl-5">
+        <div class="col-lg-9">
+            <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
+                <a href="" class="text-decoration-none d-block d-lg-none">
+                    <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
+                    <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav mr-auto py-0">
+                        <a href="~/Home/Index" class="nav-item nav-link active">Trang chủ</a>
+                        <a href="~/Home/Contact" class="nav-item nav-link">Liên hệ</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>

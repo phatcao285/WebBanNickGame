@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Admin Shop</title>
+    <!-- Thêm Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Thêm CSS tùy chỉnh -->
+    <link rel="stylesheet" href="~/Content/styles.css">
+</head>
+<body>
+    <!-- Thanhh điều hướng -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Admin Shop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Admin/Index">Trang chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Admin/Nick">Nick</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Admin/DanhMuc">Danh Mục</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Admin/ChiTietDanhMuc">Danh mục chi tiết</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Admin/DonHang">Đơn hàng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Admin/TaiKhoan">Quản lý tài khoản</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Home/Index">Thoát</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Nội dung trang -->
+    <div class="container mt-4">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body text-center">
+                            <h2>@ViewBag.Title</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @RenderBody() <!-- Đây là nơi nội dung của các trang con sẽ được hiển thị -->
+    </div>
+
+    <!-- Thêm Bootstrap JavaScript và jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

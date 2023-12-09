@@ -1,0 +1,67 @@
+﻿@model WebBanNickGame.Models.NguoiDung
+
+@{
+    ViewBag.Title = "Thông Tin Tài Khoản";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2>Thông Tin Tài Khoản</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Thông Tin Cá Nhân
+                </div>
+                <div class="card-body">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Họ và Tên:
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.TenKH)
+                        </dd>
+
+                        <dt>
+                            Email:
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.email)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Thông Tin Tài Khoản
+                </div>
+                <div class="card-body">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Tên đăng nhập:
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Tendangnhap)
+                        </dd>
+
+                        <dt>
+                            Chức vụ:
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.chucvu)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p>
+        @Html.ActionLink("Quay Lại", "Index", new { @class = "btn btn-secondary" })
+    </p>
+</div>
+
+

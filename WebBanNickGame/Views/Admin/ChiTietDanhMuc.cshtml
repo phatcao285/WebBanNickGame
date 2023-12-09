@@ -1,0 +1,37 @@
+﻿@model IEnumerable<WebBanNickGame.Models.DanhMucCT>
+
+@{
+    ViewBag.Title = "Chi Tiết Danh Mục";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+
+<p>
+    @Html.ActionLink("Tạo Mới", "ThemCTDM", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Ten)</th>
+            <th>@Html.DisplayNameFor(model => model.MaDM)</th>
+            <th>@Html.DisplayNameFor(model => model.HinhAnh)</th>
+            <th>@Html.DisplayNameFor(model => model.TrangThai)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Ten)</td>
+                <td>@Html.DisplayFor(modelItem => item.MaDM)</td>
+                <td>@Html.DisplayFor(modelItem => item.HinhAnh)</td>
+                <td>@Html.DisplayFor(modelItem => item.TrangThai)</td>
+                <td>
+                    @Html.ActionLink("Cho hoạt động lại", "HoatdongCTDanhMuc", new { id = @item.MaCTDanhMuc }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Ngừng", "XoaCTDanhMuc", new { id = @item.MaCTDanhMuc }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
